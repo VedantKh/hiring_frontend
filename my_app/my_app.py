@@ -10,6 +10,7 @@ from mercor_api import UserProfile
 
 api = MercorAPI(headers=HEADERS)
 
+profiles = api.search_profiles(search_string="front end designer")
 
 def format_profile(profile: UserProfile) -> rx.Component:
     """
@@ -89,10 +90,10 @@ def format_profile(profile: UserProfile) -> rx.Component:
 class State(rx.State):
     """The app state."""
 
-    search_query: str = "front end designer"
+    # search_query: str = "front end designer"
 
-    def handle_search(self, value: str):
-        self.search_query = value
+    # def handle_search(self, value: str):
+    #     self.search_query = value
 
 
 
@@ -102,12 +103,12 @@ def index() -> rx.Component:
     The main function to render all candidate profiles.
     """
     return rx.container(
-        rx.input(
-            placeholder="Search for a candidate...",
-            on_change=State.handle_search,
-        ),
+        # rx.input(
+        #     placeholder="Search for a candidate...",
+        #     on_change=State.handle_search,
+        # ),
         rx.vstack(
-            *[format_profile(profile) for profile in api.search_profiles(search_string=State.search_query)],
+            *[format_profile(profile) for profile in profiles],
             spacing="20px",
             align_items="start"
         ),
