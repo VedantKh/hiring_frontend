@@ -149,20 +149,35 @@ class MercorAPI:
 
     @classmethod
     def profile_pretty(cls, user_profile: UserProfile):
+        # user_profile_dict = {
+        #     "user_id":user_profile.userId,
+        #     "name":user_profile.name,
+        #     "video_recording": user_profile.interviews[0].videoRecording if user_profile.interviews else None,
+        #     "years_of_work_experience": user_profile.yearsOfWorkExperience,
+        #     "education": user_profile.education,
+        #     "github_data": user_profile.githubData,
+        #     "country": user_profile.country,
+        #     "full_time_price": user_profile.fullTimePrice,
+        #     "skills": user_profile.skills,
+        #     "summary": user_profile.summary,
+        #     "work_experience": user_profile.workExperience,
+        #     "projects": user_profile.projects,
+        #     "awards": user_profile.awards
+        # }
         user_profile_dict = {
-            "user_id":user_profile.userId,
-            "name":user_profile.name,
+            "user_id": user_profile.userId,
+            "name": user_profile.name,
             "video_recording": user_profile.interviews[0].videoRecording if user_profile.interviews else None,
             "years_of_work_experience": user_profile.yearsOfWorkExperience,
-            "education": user_profile.education,
+            "education": [education.model_dump() for education in user_profile.education],
             "github_data": user_profile.githubData,
             "country": user_profile.country,
             "full_time_price": user_profile.fullTimePrice,
             "skills": user_profile.skills,
             "summary": user_profile.summary,
-            "work_experience": user_profile.workExperience,
-            "projects": user_profile.projects,
-            "awards": user_profile.awards
+            "work_experience": [work_experience.model_dump() for work_experience in user_profile.workExperience],
+            "projects": [project.model_dump() for project in user_profile.projects],
+            "awards": [award.model_dump() for award in user_profile.awards]
         }
         return user_profile_dict
 

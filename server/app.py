@@ -1,9 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, Response, jsonify, request
+from flask_cors import CORS
+from mercor_api import MercorAPI
 from pydantic import ValidationError
 
-from mercor_api import MercorAPI
-
 app = Flask(__name__)
+CORS(
+    app,
+    supports_credentials=True,
+    resources={r"/*": {"origins": ["http://localhost:3000"]}},
+)
 
 HEADERS = {
     'accept': '*/*',
@@ -37,7 +42,8 @@ def search_profiles():
     
     try:
         profiles = api.search_profiles(search_string=search_string, count=count)
-        return jsonify([MercorAPI.profile_pretty(profile) for profile in profiles])
+        # return jsonify([MercorAPI.profile_pretty(profile) for profile in profiles])
+        return [profile.model_dump_json() for profile in profiles]
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
