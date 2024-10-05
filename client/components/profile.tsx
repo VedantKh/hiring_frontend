@@ -6,15 +6,15 @@ export function Profile({ profile }: any) {
   return (
     <>
       <header className="border-b p-6">
-        <div className="flex gap-2 items-center">
-          <Avatar>
+        <div className="flex gap-6 items-center">
+          <Avatar className="w-24 h-24">
             <AvatarImage src={profile.finalImageUrl} />
             <AvatarFallback>
               {profile?.name?.replaceAll(".", "").replaceAll(" ", "")}
             </AvatarFallback>
           </Avatar>
           <div>
-            <h3 className="text-lg font-bold">{profile.name}</h3>
+            <h3 className="text-2xl font-bold">{profile.name}</h3>
           </div>
         </div>
         <div className="mt-8">
