@@ -2,11 +2,13 @@
 
 import { QueryFunctionContext, useMutation } from "@tanstack/react-query";
 import { Loader2, Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { SearchResultCard } from "../components/search-result";
 import { Profile } from "../components/profile";
+import Image from "next/image";
+import Logo from "./logo.png";
 
 // const queryFn = async ({ queryKey }: QueryFunctionContext) => {
 //   const [url] = queryKey;
@@ -15,7 +17,7 @@ import { Profile } from "../components/profile";
 // };
 
 export default function Home() {
-  const [search_string, set_search_string] = useState("");
+  const [search_string, set_search_string] = useState("ai developers");
   const [selected_profile, set_selected_profile] = useState<number>(-1);
 
   const mutation = useMutation({
@@ -30,11 +32,16 @@ export default function Home() {
     },
   });
 
+  // useEffect(() => {
+  //   mutation.mutate("ai developers");
+  // }, []);
+
   return (
     <div className="flex min-h-screen">
       <aside className="p-6 max-w-sm w-full border-r">
+        <Image src={Logo} alt="logo" width={1136 / 12} height={416 / 12} />
         <form
-          className="flex w-full items-center space-x-2"
+          className="flex w-full items-center space-x-2 mt-4"
           onSubmit={(e) => {
             e.preventDefault();
             mutation.mutate(search_string);
