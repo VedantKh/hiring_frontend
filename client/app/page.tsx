@@ -79,7 +79,7 @@ export default function Home() {
         </ul>
       </aside>
       <main className="w-full">
-        {selected_profile !== -1 && (
+        {selected_profile !== -1 && mutation.isSuccess && (
           <Profile profile={mutation.data?.at(selected_profile)} />
         )}
       </main>
