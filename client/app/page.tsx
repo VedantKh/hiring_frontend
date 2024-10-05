@@ -32,9 +32,9 @@ export default function Home() {
     },
   });
 
-  // useEffect(() => {
-  //   mutation.mutate("ai developers");
-  // }, []);
+  useEffect(() => {
+    mutation.mutate("ai developers");
+  }, []);
 
   return (
     <div className="flex min-h-screen">
