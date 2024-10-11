@@ -38,10 +38,11 @@ def search_profiles():
     """
     data = request.json
     search_string = data.get("search_string", "")
-    count = data.get("count", 25)
-    
+    budget = data.get("budget", 7500)
+    experience = data.get("experience", 0)
+
     try:
-        profiles = api.search_profiles(search_string=search_string, count=count)
+        profiles = api.search_profiles(search_string=search_string, monthly_budget_dollars=budget, experience=experience, count=50)
         # return jsonify([MercorAPI.profile_pretty(profile) for profile in profiles])
         return [profile.model_dump_json() for profile in profiles]
     except Exception as e:

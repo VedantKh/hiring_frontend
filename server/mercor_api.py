@@ -118,7 +118,7 @@ class MercorAPI:
         self.headers = headers
         self.ENDPOINT = 'https://aws.api.mercor.com'
 
-    def search(self, search_string, monthly_budget_dollars=7500, experience=0, work_type="both", work_availability=4, count=10):
+    def search(self, search_string, monthly_budget_dollars=7500, experience=0, work_type="both", work_availability=4, count=50):
         json_params = {
             'searchString': search_string,
             'budget': monthly_budget_dollars,
@@ -133,6 +133,7 @@ class MercorAPI:
         }
         path = "/team/public/search"
         json_result = requests.post(self.ENDPOINT + path, headers=self.headers, json=json_params).json()
+        print(len(json_result))
         return [UserProfileShort(**profile) for profile in json_result]
 
     def profile(self, user_id="48be5c0e-3239-11ef-ae42-42010a400fc4"):

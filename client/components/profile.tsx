@@ -39,7 +39,7 @@ export function Profile({ profile }: any) {
             </div>
           </div>
           <div className="flex items-center mt-6">
-            <div className="flex items-center w-36">
+            <div className="flex items-center w-36 flex-shrink-0">
               <WandSparkles className="mr-1 w-4 h-4" />
               <p className="text-sm">Expertise</p>
             </div>
