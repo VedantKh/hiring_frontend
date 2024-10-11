@@ -23,17 +23,17 @@ export function Profile({ profile }: any) {
               <Contact className="mr-1 w-4 h-4" />
               <p className="text-sm">Commitment</p>
             </div>
-            <div className="space-y-2">
+            <div className="flex space-x-2">
               {profile.fullTime === 1 && (
                 <p className="text-sm">
-                  <Badge variant="outline">Full-time</Badge> at $
-                  {profile.fullTimePrice} / month
+                  <Badge variant="outline">Full-time</Badge>
+                  {/* {profile.fullTimePrice} / month */}
                 </p>
               )}
               {profile.partTime === 1 && (
                 <p className="text-sm">
-                  <Badge variant="outline">Part-time</Badge> at $
-                  {profile.partTimePrice} / month
+                  <Badge variant="outline">Part-time</Badge>
+                  {/* {profile.partTimePrice} / month */}
                 </p>
               )}
             </div>
