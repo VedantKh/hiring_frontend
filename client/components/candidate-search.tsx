@@ -25,8 +25,8 @@ import { Form, FormField } from "./ui/form";
 
 const FormSchema = z.object({
   search_string: z.string(),
-  experience: z.string(),
-  budget: z.string(),
+  experience: z.string().optional(),
+  budget: z.string().optional(),
 });
 
 export function CandidateSearch({
@@ -44,11 +44,10 @@ export function CandidateSearch({
   );
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    const new_data = {
-      ...data,
-      experience: parseInt(data.experience),
-      budget: parseInt(data.budget),
-    };
+    const new_data: any = { ...data };
+    if (data.experience) new_data.experience = parseInt(data.experience);
+    if (data.budget) new_data.budget = parseInt(data.budget);
+    new_data.search_string = data.search_string.trim();
     mutation.mutate(new_data);
   };
 
@@ -60,7 +59,6 @@ export function CandidateSearch({
           <div className="flex w-full items-center space-x-2 mt-4">
             <Input
               placeholder="Search people..."
-              disabled={mutation.isPending}
               {...form.register("search_string")}
             />
             <Button

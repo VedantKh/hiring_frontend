@@ -56,7 +56,8 @@ def get_profile(user_id):
     """
     try:
         profile = api.profile(user_id=user_id)
-        return jsonify(MercorAPI.profile_pretty(profile))
+        # return jsonify(MercorAPI.profile_pretty(profile))
+        return profile.model_dump_json()
     except ValidationError as ve:
         return jsonify({"error": "Invalid data", "details": ve.errors()}), 400
     except Exception as e:

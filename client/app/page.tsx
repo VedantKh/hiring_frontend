@@ -31,10 +31,6 @@ export default function Home() {
     },
   });
 
-  useEffect(() => {
-    mutation.mutate("ai developers");
-  }, []);
-
   return (
     <div className="flex min-h-screen min-w-screen">
       <aside className="p-6 max-w-sm w-full border-r">
