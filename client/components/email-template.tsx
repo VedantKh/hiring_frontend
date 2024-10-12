@@ -70,7 +70,10 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         <strong>Candidate Name:</strong> {candidateName}
       </li>
       <li>
-        <strong>Candidate User ID:</strong> {candidateUserId}
+        <strong>Candidate Profile:</strong>{" "}
+        <a href={`https://hiring.algor.ai/profile/${candidateUserId}`}>
+          {candidateUserId}
+        </a>
       </li>
       <li>
         <strong>Candidate Skills:</strong> {candidateSkills.join(", ")}
