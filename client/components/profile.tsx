@@ -2,6 +2,7 @@ import { Contact, WandSparkles } from "lucide-react";
 import { AskForIntro } from "./ask-for-intro";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
+import { ExpertiseChips } from "./expertise-chips";
 
 export function Profile({ profile }: any) {
   return (
@@ -44,11 +45,7 @@ export function Profile({ profile }: any) {
               <WandSparkles className="mr-1 w-4 h-4" />
               <p className="text-sm">Expertise</p>
             </div>
-            <div className="flex gap-2 flex-wrap">
-              {profile.skills?.map((skill: string, index: number) => (
-                <Badge key={index}>{skill}</Badge>
-              ))}
-            </div>
+            <ExpertiseChips skills={profile.skills} />
           </div>
           <div className="mt-8 space-x-2">
             <AskForIntro profile={profile} />

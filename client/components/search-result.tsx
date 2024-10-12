@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "./ui/badge";
+import { ExpertiseChips } from "./expertise-chips";
 
 export function SearchResultCard({ profile, onClick }: any) {
   if (profile)
@@ -29,11 +30,7 @@ export function SearchResultCard({ profile, onClick }: any) {
         <div className="p-4 border-t">
           <div className="mb-4">
             <h4 className="text-sm">Expertise</h4>
-            <div className="flex gap-2 flex-wrap mt-2">
-              {profile.skills?.map((skill: string, index: number) => (
-                <Badge key={index}>{skill}</Badge>
-              ))}
-            </div>
+            <ExpertiseChips skills={profile.skills} />
           </div>
           <div>
             <h4 className="text-sm">Commitment</h4>
