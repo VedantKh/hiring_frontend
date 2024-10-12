@@ -39,10 +39,10 @@ export function SearchResultCard({ profile, onClick }: any) {
             <h4 className="text-sm">Commitment</h4>
             <div className="flex gap-2 flex-wrap mt-2">
               {profile.fullTime === 1 && (
-                <Badge variant="secondary">Full-time</Badge>
+                <Badge variant="outline">Full-time</Badge>
               )}
               {profile.partTime === 1 && (
-                <Badge variant="secondary">Part-time</Badge>
+                <Badge variant="outline">Part-time</Badge>
               )}
             </div>
           </div>

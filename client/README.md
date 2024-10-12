@@ -36,8 +36,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Todo
-- [ ] Want to build out a more detailed search bar where people can input their specific requirements
+
+- [x] Want to build out a more detailed search bar where people can input their specific requirements
 - [ ] For each search, return top 50 profiles with 10 profiles on 5 different pages.
-- [ ] Convert each profile into a shareable URL link
+- [x] Convert each profile into a shareable URL link
 - [ ] Build an Ask for intro button which asks them for their details and sends me an email of who they are and the profile they’re interested in
-- [ ] Deploy the finished site on hiring.algoro.ai 
+
+- [ ] Deploy the finished site on hiring.algoro.ai

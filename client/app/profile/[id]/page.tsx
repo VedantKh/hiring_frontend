@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { Profile } from "../../../components/profile";
 
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -29,7 +30,9 @@ export default function ProfilePage() {
     return (
       <div className="max-w-4xl mx-auto py-10">
         <div className="p-6">
-          <Image src={Logo} alt="logo" width={1136 / 12} height={416 / 12} />
+          <Link href="/">
+            <Image src={Logo} alt="logo" width={1136 / 12} height={416 / 12} />
+          </Link>
         </div>
         <Profile profile={profileData} />
       </div>

@@ -1,13 +1,9 @@
-import { Clipboard, Contact, Mail, Share, WandSparkles } from "lucide-react";
+import { Contact, WandSparkles } from "lucide-react";
+import { AskForIntro } from "./ask-for-intro";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { useToast } from "../hooks/use-toast";
-import { ToastAction } from "./ui/toast";
 
 export function Profile({ profile }: any) {
-  const { toast } = useToast();
-
   return (
     <>
       <header className="border-b p-6">
@@ -54,26 +50,8 @@ export function Profile({ profile }: any) {
               ))}
             </div>
           </div>
-          <div className="mt-6 space-x-2">
-            <Button>
-              <Mail className="mr-2 w-4 h-4" />
-              Ask for intro
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                const url = `${window.location.origin}/profile/${profile.userId}`;
-                navigator.clipboard.writeText(url);
-                toast({
-                  title: "Profile link copied",
-                  description:
-                    "The profile URL has been copied to your clipboard.",
-                });
-              }}
-            >
-              <Clipboard className="mr-2 w-4 h-4" />
-              Share profile
-            </Button>
+          <div className="mt-8 space-x-2">
+            <AskForIntro profile={profile} />
           </div>
         </div>
       </header>

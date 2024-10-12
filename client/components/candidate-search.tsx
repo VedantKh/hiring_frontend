@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Form, FormField } from "./ui/form";
+import Link from "next/link";
 
 const FormSchema = z.object({
   search_string: z.string(),
@@ -53,7 +54,9 @@ export function CandidateSearch({
 
   return (
     <div>
-      <Image src={Logo} alt="logo" width={1136 / 12} height={416 / 12} />
+      <Link href="/">
+        <Image src={Logo} alt="logo" width={1136 / 12} height={416 / 12} />
+      </Link>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex w-full items-center space-x-2 mt-4">
