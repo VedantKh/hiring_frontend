@@ -13,7 +13,9 @@ export default function ProfilePage() {
   const { id } = useParams();
 
   const fetchProfile = async (id: string) => {
-    const response = await fetch(`${process.env.API_URL}/profile/${id}`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/profile/${id}`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch profile");
     }

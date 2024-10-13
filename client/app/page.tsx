@@ -21,7 +21,7 @@ export default function Home() {
 
   const mutation = useMutation({
     mutationFn: async (data: any) => {
-      let response = await fetch(`${process.env.API_URL}/search`, {
+      let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/search`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data }),
