@@ -35,6 +35,7 @@ import {
   FormItem,
   FormLabel,
 } from "./ui/form";
+import Link from "next/link";
 
 export const FormSchema = z.object({
   firstName: z.string(),
@@ -209,23 +210,30 @@ export function AskForIntro({ profile }: any) {
                   {...form.register("schedulingInstructions")}
                 />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full">
                 <FormField
                   control={form.control}
                   name="termsAgreement"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 w-full">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
                       </FormControl>
-                      <div className="space-y-1 leading-none">
+                      <div className="space-y-1 leading-none w-full">
                         <FormLabel>I agree to the terms of service.</FormLabel>
                         <FormDescription>
-                          By checking this box, you agree to our Terms of
-                          Service and Privacy Policy.
+                          By checking this box, you agree to our{" "}
+                          <Link
+                            href="/tos"
+                            className="underline"
+                            target="_blank"
+                          >
+                            terms of service
+                          </Link>
+                          .
                         </FormDescription>
                       </div>
                     </FormItem>
