@@ -8,9 +8,22 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useController, Control } from "react-hook-form";
 
-export function PriceSlider() {
-  const [value, setValue] = React.useState([500]);
+interface PriceSliderProps {
+  control: Control<any>;
+  name: string;
+}
+
+export function PriceSlider({ control, name }: PriceSliderProps) {
+  const {
+    field: { value, onChange },
+  } = useController({
+    name,
+    control,
+    defaultValue: 3500,
+  });
+
   const [showTooltip, setShowTooltip] = React.useState(false);
   const min = 500;
   const max = 10000;
@@ -23,8 +36,8 @@ export function PriceSlider() {
         min={min}
         max={max}
         step={step}
-        value={value}
-        onValueChange={setValue}
+        value={[value]}
+        onValueChange={(newValue) => onChange(newValue[0])}
       >
         <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
           <SliderPrimitive.Range className="absolute h-full bg-primary" />
@@ -46,7 +59,7 @@ export function PriceSlider() {
               className="bg-primary text-primary-foreground px-2 py-1 rounded shadow-lg"
             >
               <p className="font-semibold">
-                {value[0] === 10000 ? "> $10000" : `< $${value[0]}`}
+                {value === 10000 ? "> $10000" : `< $${value}`}
               </p>
             </TooltipContent>
           </Tooltip>

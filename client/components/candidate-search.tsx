@@ -28,7 +28,7 @@ import { PriceSlider } from "./price-slider";
 const FormSchema = z.object({
   search_string: z.string(),
   experience: z.string().optional(),
-  budget: z.string().optional(),
+  budget: z.number().default(3500).optional(),
 });
 
 export function CandidateSearch({
@@ -46,10 +46,12 @@ export function CandidateSearch({
   );
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    set_selected_profile(-1);
     const new_data: any = { ...data };
     if (data.experience) new_data.experience = parseInt(data.experience);
-    if (data.budget) new_data.budget = parseInt(data.budget);
+    // if (data.budget) new_data.budget = parseInt(data.budget);
     new_data.search_string = data.search_string.trim();
+    new_data.budget = data.budget;
     mutation.mutate(new_data);
   };
 
@@ -79,6 +81,7 @@ export function CandidateSearch({
             </Button>
           </div>
           <div className="mt-2 space-y-2">
+            <PriceSlider control={form.control} name="budget" />
             <FormField
               control={form.control}
               name="experience"
@@ -147,7 +150,6 @@ export function CandidateSearch({
                 </Select>
               )}
             /> */}
-            <PriceSlider />
           </div>
         </form>
       </Form>

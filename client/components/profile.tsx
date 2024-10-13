@@ -1,8 +1,14 @@
-import { Contact, WandSparkles } from "lucide-react";
+import { Contact, Info, WandSparkles } from "lucide-react";
 import { AskForIntro } from "./ask-for-intro";
+import { ExpertiseChips } from "./expertise-chips";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
-import { ExpertiseChips } from "./expertise-chips";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export function Profile({ profile }: any) {
   return (
@@ -38,6 +44,54 @@ export function Profile({ profile }: any) {
                   {/* {profile.partTimePrice} / month */}
                 </p>
               )}
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button>
+                      <Badge variant="outline" className="flex items-center">
+                        {profile.fullTime === 1
+                          ? Array(
+                              Math.min(
+                                4,
+                                Math.ceil(profile.fullTimePrice / 3000)
+                              )
+                            )
+                              .fill("$")
+                              .join("")
+                          : Array(
+                              Math.min(
+                                4,
+                                Math.ceil(profile.partTimePrice / 3000)
+                              )
+                            )
+                              .fill("$")
+                              .join("")}
+                        <Info className="w-4 h-4 ml-1" />
+                      </Badge>
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent className="p-2 space-y-1">
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Badge variant="outline">$</Badge>
+                        <span className="text-sm">&lt;$3k/mo</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Badge variant="outline">$$</Badge>
+                        <span className="text-sm">$3k-$6k/mo</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Badge variant="outline">$$$</Badge>
+                        <span className="text-sm">$6k-$10k/mo</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Badge variant="outline">$$$$</Badge>
+                        <span className="text-sm">&gt;$10k/mo</span>
+                      </div>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
           <div className="flex items-center mt-6">
