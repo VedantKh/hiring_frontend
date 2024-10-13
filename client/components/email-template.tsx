@@ -71,7 +71,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       </li>
       <li>
         <strong>Candidate Profile:</strong>{" "}
-        <a href={`https://hiring.algor.ai/profile/${candidateUserId}`}>
+        <a href={`https://hiring.algoro.ai/profile/${candidateUserId}`}>
           {candidateUserId}
         </a>
       </li>
