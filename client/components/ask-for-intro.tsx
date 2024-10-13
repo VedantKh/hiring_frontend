@@ -43,7 +43,12 @@ export const FormSchema = z.object({
   email: z.string().email(),
   phone: z.string(),
   companyName: z.string(),
-  companyWebsite: z.string().url(),
+  companyWebsite: z
+    .string()
+    .regex(
+      /\b((https?|ftp|file):\/\/)?((([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,})|localhost)(:\d{2,5})?(\/\S*)?\b/,
+      "Invalid URL"
+    ),
   commitment: z.enum(["fullTime", "partTime", "either"]),
   jobSummary: z.string(),
   schedulingInstructions: z.string(),
@@ -161,7 +166,6 @@ export function AskForIntro({ profile }: any) {
                   </Label>
                   <Input
                     id="companyWebsite"
-                    type="url"
                     {...form.register("companyWebsite")}
                   />
                 </div>
