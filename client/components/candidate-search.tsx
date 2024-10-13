@@ -8,27 +8,19 @@ import Logo from "@/app/logo.png";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Loader2, Search } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useProfileStore } from "../app/page";
 import { SearchResultCard } from "./search-result";
+import { SearchSlider } from "./search-slider";
 import { Button } from "./ui/button";
+import { Form } from "./ui/form";
 import { Input } from "./ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
-import { Form, FormField } from "./ui/form";
-import Link from "next/link";
-import { PriceSlider } from "./price-slider";
+import { useEffect } from "react";
 
 const FormSchema = z.object({
   search_string: z.string(),
-  experience: z.string().optional(),
-  budget: z.number().default(3500).optional(),
+  experience: z.number().optional(),
+  budget: z.number().optional(),
 });
 
 export function CandidateSearch({
@@ -38,21 +30,24 @@ export function CandidateSearch({
 }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: FormSchema.parse({
+      search_string: "AI Developer",
+      experience: 3,
+      budget: 5000,
+    }),
   });
 
-  // const selected_profile = useProfileStore((state) => state.selectedProfile);
+  useEffect(() => {
+    mutation.mutate(form.getValues());
+  }, []);
+
   const set_selected_profile = useProfileStore(
     (state) => state.setSelectedProfile
   );
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     set_selected_profile(-1);
-    const new_data: any = { ...data };
-    if (data.experience) new_data.experience = parseInt(data.experience);
-    // if (data.budget) new_data.budget = parseInt(data.budget);
-    new_data.search_string = data.search_string.trim();
-    new_data.budget = data.budget;
-    mutation.mutate(new_data);
+    mutation.mutate(data);
   };
 
   return (
@@ -81,8 +76,29 @@ export function CandidateSearch({
             </Button>
           </div>
           <div className="mt-2 space-y-2">
-            <PriceSlider control={form.control} name="budget" />
-            <FormField
+            <SearchSlider
+              control={form.control}
+              name="budget"
+              label="Monthly Budget"
+              min={500}
+              max={10000}
+              step={500}
+              template={(value) =>
+                value === 10000 ? "> $10000" : `< $${value}`
+              }
+              defaultValue={5000}
+            />
+            <SearchSlider
+              control={form.control}
+              name="experience"
+              label="Years of Experience"
+              min={0}
+              max={10}
+              step={1}
+              template={(value) => `${value}+ years`}
+              defaultValue={3}
+            />
+            {/* <FormField
               control={form.control}
               name="experience"
               render={({ field }) => (
@@ -111,7 +127,7 @@ export function CandidateSearch({
                   </SelectContent>
                 </Select>
               )}
-            />
+            /> */}
             {/* <FormField
               control={form.control}
               name="budget"

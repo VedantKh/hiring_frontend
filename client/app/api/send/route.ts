@@ -1,8 +1,5 @@
 import { Resend } from "resend";
-import {
-  EmailTemplate,
-  EmailTemplateProps,
-} from "../../../components/email-template";
+import { EmailTemplate, EmailTemplateProps } from "@/components/email-template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,9 +8,9 @@ export async function POST(request: Request) {
     const emailData: EmailTemplateProps = await request.json();
 
     const { data, error } = await resend.emails.send({
-      from: "Algoro <onboarding@resend.dev>",
-      to: ["delivered@resend.dev"],
-      subject: "Introduction Request",
+      from: "Algoro <contact@algoro.ai>",
+      to: ["vedant@algoro.ai", "abdulla@algoro.ai", "contact@algoro.ai"],
+      subject: "Introduction Request – Algoro",
       react: EmailTemplate(emailData),
     });
 
