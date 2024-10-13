@@ -20,6 +20,7 @@ interface SearchSliderProps {
   step: number;
   defaultValue: number;
   label: string;
+  isLoading: boolean;
 }
 
 export function SearchSlider({
@@ -30,6 +31,7 @@ export function SearchSlider({
   step,
   template,
   defaultValue,
+  isLoading,
   label,
 }: SearchSliderProps) {
   const {
@@ -41,12 +43,16 @@ export function SearchSlider({
   });
 
   const [showTooltip, setShowTooltip] = React.useState(false);
+
   return (
     <div className="py-2">
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <div className="w-full mt-1">
+      <FormLabel htmlFor={name} className={isLoading ? "opacity-50" : ""}>
+        {label}
+      </FormLabel>
+      <div className={`w-full mt-1 ${isLoading ? "opacity-50" : ""}`}>
         <SliderPrimitive.Root
           className="relative flex w-full touch-none select-none items-center"
+          disabled={isLoading}
           min={min}
           max={max}
           step={step}
@@ -57,7 +63,7 @@ export function SearchSlider({
             <SliderPrimitive.Range className="absolute h-full bg-primary" />
           </SliderPrimitive.Track>
           <TooltipProvider>
-            <Tooltip open={showTooltip}>
+            <Tooltip open={isLoading ? false : showTooltip}>
               <TooltipTrigger asChild>
                 <SliderPrimitive.Thumb
                   className="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"

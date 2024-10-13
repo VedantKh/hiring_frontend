@@ -60,6 +60,7 @@ export function CandidateSearch({
           <div className="flex w-full items-center space-x-2 mt-4">
             <Input
               placeholder="Search people..."
+              disabled={mutation.isPending}
               {...form.register("search_string")}
             />
             <Button
@@ -77,6 +78,7 @@ export function CandidateSearch({
           </div>
           <div className="mt-2 space-y-2">
             <SearchSlider
+              isLoading={mutation.isPending}
               control={form.control}
               name="budget"
               label="Monthly Budget"
@@ -89,6 +91,7 @@ export function CandidateSearch({
               defaultValue={5000}
             />
             <SearchSlider
+              isLoading={mutation.isPending}
               control={form.control}
               name="experience"
               label="Years of Experience"
