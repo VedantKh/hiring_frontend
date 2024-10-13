@@ -52,7 +52,7 @@ export const FormSchema = z.object({
   commitment: z.enum(["fullTime", "partTime", "either"]),
   jobSummary: z.string(),
   schedulingInstructions: z.string(),
-  termsAgreement: z.boolean().default(false),
+  termsAgreement: z.boolean(),
 });
 
 export function AskForIntro({ profile }: any) {
@@ -224,6 +224,7 @@ export function AskForIntro({ profile }: any) {
                         <Checkbox
                           checked={field.value}
                           onCheckedChange={field.onChange}
+                          required
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none w-full">
