@@ -23,6 +23,7 @@ import {
 } from "./ui/select";
 import { Form, FormField } from "./ui/form";
 import Link from "next/link";
+import { PriceSlider } from "./price-slider";
 
 const FormSchema = z.object({
   search_string: z.string(),
@@ -108,7 +109,7 @@ export function CandidateSearch({
                 </Select>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="budget"
               render={({ field }) => (
@@ -145,7 +146,8 @@ export function CandidateSearch({
                   </SelectContent>
                 </Select>
               )}
-            />
+            /> */}
+            <PriceSlider />
           </div>
         </form>
       </Form>
